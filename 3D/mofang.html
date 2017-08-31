@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	  .box{width: 200px;height: 200px;background: #666;opacity: 1;text-align: center;line-height: 200px;font-size: 50px;position: absolute;border-radius: 10px;color: red;transition-duration: 2s}
+      #fe{margin-left: 200px;margin-top: 200px;transform-style: preserve-3d;position: relative; width: 200px;height: 200px;-background: red;transform:perspective(800px) }
+      img{width: 100%;height: 100%}
+      button{margin-top: 50px}
+	</style>
+</head>
+<body>
+  <div id="fe">
+  	<div  class="box"><img src="img/1.jpg" alt=""></div>
+	<div  class="box"><img src="img/2.jpg" alt=""></div>
+	<div  class="box"><img src="img/3.jpg" alt=""></div>
+	<div  class="box"><img src="img/6.jpg" alt=""></div>
+	<div  class="box"><img src="img/5.jpg" alt=""></div>
+	<div  class="box"><img src="img/4.jpg" alt=""></div>
+  </div>
+   <button>换</button>
+
+</body>
+<script type="text/javascript" src=js/jquery-1.8.3.min.js></script>
+<script type="text/javascript">
+	
+     $(function(){
+     	$('button').click(function(){
+     			$('.box').eq(0).css({transform:'translateZ(100px)','transition-delay':'2500ms'})
+		     	$('.box').eq(1).css({transform:'translateZ(-100px)','transition-delay':'500ms'})
+		     	$('.box').eq(2).css({transform:'translateX(-100px) rotateY(90deg)','transition-delay':'1000ms'})
+		     	$('.box').eq(3).css({transform:'translateX(100px) rotateY(90deg)','transition-delay':'1500ms'})
+		     	$('.box').eq(4).css({transform:'translateY(-100px) rotatex(90deg)','transition-delay':'2000ms'})
+		     	$('.box').eq(5).css({transform:'translateY(100px) rotatex(90deg)'})
+     	})
+     
+     	var i=0
+     	var a=0
+     	$(document).mousedown(function(e){
+           var e= e||width.event
+           var x= e.pageX
+           var y=e.pageY
+           e.preventDefault()
+           	$(document).mousemove(function(e){
+	           var e= e||width.event
+	           var thex= e.pageX-x
+	           var they =e.pageY-y
+         
+	           if(thex>0){
+	           	    if(i>=360)i=0
+		            i+=1
+		            $('#fe').css({transform:'perspective(800px) rotateY('+i+'deg) rotateX('+a+'deg) '})
+		             x=thex+x
+	           }else if(thex<0){
+	           	    if(i<=-360)i=0
+		            i-=1
+		            $('#fe').css({transform:'perspective(800px) rotateY('+i+'deg) rotateX('+a+'deg) '})
+		             x=thex+x
+	           }
+	           else if(they>0){
+	           	    if(a>=360)a=0
+		            a+=1
+		            $('#fe').css({transform:'perspective(800px) rotateY('+i+'deg)  rotateX('+a+'deg) '})
+		            y=thex+y
+	           }else if(they<0){
+	           	    if(a<=-360)a=0
+		            a-=1
+		            $('#fe').css({transform:'perspective(800px) rotateY('+i+'deg)  rotateX('+a+'deg) '})
+		            y=thex+y
+	           }
+               
+	     	})
+     	})
+     	$(document).mouseup(function(){
+     		$(document).off('mousemove')
+     	})
+    
+     })
+
+</script>
+</html>

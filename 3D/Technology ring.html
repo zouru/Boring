@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+      *{margin: 0;padding: 0;list-style: none;}
+      #box{transform-style: preserve-3d;transform: perspective(800px) rotateX(-30deg);width: 150px;height: 200px;position: relative;margin: 250px auto;}
+      li{position: absolute; width: 148px;height: 198px;border: 1px solid blue;background: orange;border-radius: 10px;text-align: center;line-height: 198px;font-size: 50px;opacity: 0.8}
+      button{position: absolute;};
+	</style>
+</head>
+<body>
+    <div id="box">
+    	<ul>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    	</ul>
+    	
+    </div>
+<button style="bottom: 0;left: 0">收起</button>
+<button style="bottom: 0;left: 50px">圈圈</button>
+<button style="bottom: 0;left: 100px">平板</button>
+	<script type="text/javascript" src='js/jquery-1.8.3.min.js'></script>
+	<script type="text/javascript">
+$(function(){ 
+	        var bs=1
+	        var tag=false
+	        var is=1
+            dy()
+            
+           $('button').eq(0).click(function(){
+           	     tag=false
+           	     is=0
+                 $('li').each(function(i,val){
+                     $('li').eq(i).css({transform:"rotateY(0deg) translateZ(0px)", transition: 'all 300ms linear 0ms'})
+                 })
+           })
+           $('button').eq(1).click(function(){
+           	     is=1
+                 dy()
+           })
+           $('button').eq(2).click(function(){
+           	     tag=false
+           	     is=0
+           	     var the=0
+                 $('li').each(function(i,val){
+                 	 bs=0.5
+                 	 $('li').eq(i).css({width:148*bs,height:198*bs})
+                 	 $('li').eq(0).css({transform:"rotateY(0deg) translateZ(0px) translateZ(0px)", transition: 'all 300ms linear 0ms'})
+                 	 $('li').eq(1).css({transform:"rotateY(0deg) translateX("+(148*bs*1+10)+"px) translateZ(0px)", transition: 'all 300ms linear 0ms'})
+                     $('li').eq(2).css({transform:"rotateY(0deg) translateX("+(148*bs*2+20)+"px) translateZ(0px)", transition: 'all 300ms linear 0ms'})
+                     $('li').eq(3).css({transform:"rotateY(0deg) translateX("+(148*bs*3+30)+"px) translateZ(0px)", transition: 'all 300ms linear 0ms'})
+
+                      $('li').eq(4).css({transform:"rotateY(0deg) translateZ(0px) translateZ("+150+"px)", transition: 'all 300ms linear 0ms'})
+                 	 $('li').eq(5).css({transform:"rotateY(0deg) translateX("+(148*bs*1+10)+"px) translateZ("+150+"px)", transition: 'all 300ms linear 0ms'})
+                     $('li').eq(6).css({transform:"rotateY(0deg) translateX("+(148*bs*2+20)+"px) translateZ("+150+"px)", transition: 'all 300ms linear 0ms'})
+                     $('li').eq(7).css({transform:"rotateY(0deg) translateX("+(148*bs*3+30)+"px) translateZ("+150+"px)", transition: 'all 300ms linear 0ms'})
+
+                      $('li').eq(8).css({transform:"rotateY(0deg) translateZ(0px) translateZ("+300+"px)", transition: 'all 300ms linear 0ms'})
+                 	 $('li').eq(9).css({transform:"rotateY(0deg) translateX("+(148*bs*1+10)+"px) translateZ("+300+"px)", transition: 'all 300ms linear 0ms'})
+                     $('li').eq(10).css({transform:"rotateY(0deg) translateX("+(148*bs*2+20)+"px) translateZ("+300+"px)", transition: 'all 300ms linear 0ms'})
+                     $('li').eq(11).css({transform:"rotateY(0deg) translateX("+(148*bs*3+30)+"px) translateZ("+300+"px)", transition: 'all 300ms linear 0ms'})
+                     
+
+
+                 })
+           })
+           
+           
+		    function dy(){
+		    	 var time=0
+			     var deg=0
+			     setTimeout(function(){
+                   tag=true
+			     },3600)
+			     $('li').each(function(i,val){
+			     	$('li').eq(i).css({width:148*bs,height:198*bs})
+			     	$('li').eq(i).css({transform:"rotateY("+deg+"deg) translateZ("+(300*bs)+"px)", transition: 'all 300ms linear '+time+'ms'})
+			     	deg+=30
+			     	time+=300
+			     })	  	
+		    }
+		    function d(){
+                 var time=0
+			     var deg=0
+			     $('li').each(function(i,val){
+			     	$('li').eq(i).css({width:148*bs,height:198*bs})
+			     	$('li').eq(i).css({transform:"rotateY("+deg*is+"deg) translateZ("+(300*bs*is)+"px)", transition: 'a 300ms linear '+time+'ms'})
+			     	deg+=30
+			     	time+=300
+			     })
+		    }
+          
+     	  document.onmousewheel=(function(e){
+           if(tag){
+           	  if(e.wheelDelta>0){
+		         bs+=0.5
+		         if(bs>4)bs=4
+		         d()
+		      }else{
+		         bs-=0.5
+		         if(bs<0.5)bs=0.5
+		         d()
+		      }
+           }
+		     
+		  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var i=0
+     	var a=-30
+     	$(document).mousedown(function(e){
+           var e= e||width.event
+           var x= e.pageX
+           var y=e.pageY
+
+           e.preventDefault()
+           	$(document).mousemove(function(e){
+
+	           var e= e||width.event
+	           var thex= e.pageX-x
+	           var they =e.pageY-y
+	           if(thex>0){
+	           	    if(i>=360)i=0
+		            i+=1
+		             $('#box').css({transform:'perspective(800px) rotateY('+i+'deg) rotateX('+a+'deg) '})
+		             x=thex+x
+	           }else if(thex<0){
+	           	    if(i<=-360)i=0
+		            i-=1
+		            $('#box').css({transform:'perspective(800px) rotateY('+i+'deg) rotateX('+a+'deg) '})
+		             x=thex+x
+	           }
+	           else if(they>0){
+	           	    if(a>=360)a=0
+		            a+=1
+		             $('#box').css({transform:'perspective(800px) rotateY('+i+'deg) rotateX('+a+'deg) '})
+		            y=thex+y
+	           }else if(they<0){
+	           	    if(a<=-360)a=0
+		            a-=1
+		             $('#box').css({transform:'perspective(800px) rotateY('+i+'deg) rotateX('+a+'deg) '})
+		            y=thex+y
+	           }
+               
+	     	})
+     	})
+     	$(document).mouseup(function(){
+     		$(document).off('mousemove')
+     	})
+})
+    
+
+
+
+
+
+
+
+
+
+
+
+
+        // $('li').eq(0).css({transform:"rotateY(120deg) translateZ(300px)", transition: 'all 300ms linear 0ms'})	
+		      // $('li').eq(1).css({transform:"rotateY(90deg) translateZ(300px)", transition: 'all 300ms linear 300ms'})	
+		      // $('li').eq(2).css({transform:"rotateY(60deg) translateZ(300px)", transition: 'all 300ms linear 600ms'})	
+		      // $('li').eq(3).css({transform:"rotateY(30deg) translateZ(300px)", transition: 'all 300ms linear 900ms'})
+		      // $('li').eq(4).css({transform:"rotateY(0deg) translateZ(300px)", transition: 'all 300ms linear 1200ms'})	
+		      // $('li').eq(5).css({transform:"rotateY(-30deg) translateZ(300px)", transition: 'all 300ms linear 1500ms'})	
+		      // $('li').eq(6).css({transform:"rotateY(-60deg) translateZ(300px)", transition: 'all 300ms linear 1800ms'})
+		      // $('li').eq(7).css({transform:"rotateY(-90deg) translateZ(300px)", transition: 'all 300ms linear 2100ms'})	
+		      // $('li').eq(8).css({transform:"rotateY(-120deg) translateZ(300px)", transition: 'all 300ms linear 2400ms'})	
+		      // $('li').eq(9).css({transform:"rotateY(-150deg) translateZ(300px)", transition: 'all 300ms linear 2700ms'})	
+		      // $('li').eq(10).css({transform:"rotateY(-180deg) translateZ(300px)", transition: 'all 300ms linear 3000ms'})	
+		      // $('li').eq(11).css({transform:"rotateY(-210deg) translateZ(300px)", transition: 'all 300ms linear 3300ms'})
+	</script>
+</body>
+</html>
